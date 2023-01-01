@@ -1,14 +1,28 @@
+import { useState } from "react";
 import React from 'react'
 import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+
 function Header() {
+  // const navigate = useNavigate();
+  const [loggedInUser, setLoggedInUser] = useState();
+
+  const logoutEventHandler = (e) => {
+    e.preventDefault();
+
+    localStorage.removeItem("user_token");
+    setLoggedInUser(null);
+  };
   return (
     <div className="bg-[#F1F3FF]">
-        <div className="p-8">
+      {loggedInUser ? loggedInUser.name : ""}{" "}
+      <div className="p-8">
         <ul className="flex justify-end">
           <li className="mr-6">
-            <img src="/logo.svg" className="mr-[800px]" alt=""/>
+            <img src="/logo.svg" className="mr-[750px]" alt=""/>
           </li>
-          <li className="mr-6 ml-[-60px]">
+          <li className="mr-2">
             <a
               className="text-black hover:text-blue-800 text-sm font-sans"
               href="/"
@@ -41,7 +55,7 @@ function Header() {
             </a>
           </li>
           <button
-            // onClick={(e) => onSubmitButtonHandler(e)}
+            onClick={(e) => logoutEventHandler(e)}
             className="bg-[#5CB85F] text-white font-bold w-[100px] mt-[-10px]"
             type="button"
           >
