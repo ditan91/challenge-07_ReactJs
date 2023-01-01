@@ -56,15 +56,16 @@ function Header() {
           </li>
           <button
             onClick={(e) => logoutEventHandler(e)}
-            className="bg-[#5CB85F] text-white font-bold w-[100px] mt-[-10px]"
+            className="bg-[#5CB85F] text-white font-bold w-[100px] mt-[-10px] no-underline text-white font-sans text-sm"
             type="button"
           >
-            <Link
+            Sign Out
+            {/* <Link
               to="/register"
               className="no-underline text-white font-sans text-sm"
             >
               Sign Out
-            </Link>
+            </Link> */}
           </button>
         </ul>
       </div>
@@ -73,7 +74,14 @@ function Header() {
         <div className="m-[40px]">
           <h1 className="font-sans text-black font-bold text-4xl mb-8">Sewa & Rental Mobil Terbaik di Kawasan Bandung</h1>
           <p className="font-sans text-black text-sm mr-[175px] mb-6">Selamat datang di Binar Car Rental, Kami menyediakan mobil kualitas terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu untuk sewa mobil selama 24 jam.</p>
-          <button className="bg-[#5CB85F] text-white font-bold py-2 px-7 w-[200px] mt-[-10px]">Mulai Sewa Mobil</button>
+          <button className="bg-[#5CB85F] text-white font-bold py-2 px-7 w-[200px] mt-[-10px]">
+            <Link
+              to="/cars"
+              className="no-underline text-white font-sans text-sm"
+            >
+              Mulai Sewa Mobil
+            </Link>
+          </button>
         </div>
         
         <div className="">
