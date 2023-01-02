@@ -1,9 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
-import { useState } from "react";
-// import Datepicker from 'flowbite-datepicker/Datepicker';
-// import Datepicker from "react-tailwindcss-datepicker";
-// import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function ListCar() {
   // const navigate = useNavigate();
@@ -16,15 +14,65 @@ export default function ListCar() {
     setLoggedInUser(null);
   };
 
-  // const [value, setValue] = useState({
-  //   startDate: new Date(),
-  //   endDate: new Date().setMonth(11),
-  // });
+  const [carsData, setCarsData] = useState([]);
+  
 
-  // const handleValueChange = (newValue) => {
-  //   console.log("newValue:", newValue);
-  //   setValue(newValue);
+  useEffect(() => {
+    console.log("useEffect running");
+    const getCarsData = async () => {
+      const cars = await axios.get(
+        "https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json"
+
+      );
+      setCarsData(cars.data);
+    };
+
+    getCarsData();
+  });
+
+  // const [type, setType] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [capacity, setCapacity] = useState();
+
+  // const onChangeType = (e) => {
+  //   const value = e.target.value;
+
+  //   setType(value);
   // };
+  const onChangeDate = (e) => {
+    const value = e.target.value;
+
+    setDate(value);
+  };
+  const onChangeTime = (e) => {
+    const value = e.target.value;
+
+    setTime(value);
+  };
+  const onChangeCapacity = (e) => {
+    const value = e.target.value;
+
+    setCapacity(value);
+  };
+  const ListCar = []
+  const [filter, setFilterCars] = useState();
+  const onSubmitButtonHandler = async (e) => {
+    e.preventDefault();
+    carsData.map((car) => {
+      if (
+        date <= car.availableAt.split("T", 1) &&
+        capacity <= car.capacity &&
+        time.split(":", 1) <=
+          car.availableAt.substring(11, 16).split(":", 1)
+      ) {
+        ListCar.push(car);
+      }
+    });
+
+    setFilterCars(ListCar);
+  };
+  
   return (
     <div className="bg-[#F1F3FF]">
       {loggedInUser ? loggedInUser.name : ""}{" "}
@@ -117,6 +165,7 @@ export default function ListCar() {
           <div className="relative mt-2 w-[200px]">
             <input
               type="date"
+              onChange={(e) => onChangeDate(e)}
               className="w-full p-1 pl-3 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
               // onChange={(e) => setDateCars(e.target.value)}
             />
@@ -126,7 +175,7 @@ export default function ListCar() {
           Waktu Jemput/Ambil
           <div className="relative w-[200px] mt-2">
             <input
-              // onChange={(e) => onChangePasswordHandler(e)}
+              onChange={(e) => onChangeTime(e)}
               className="w-full p-1 pl-3 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
               // id="inline-password"
               type="time"
@@ -138,7 +187,7 @@ export default function ListCar() {
           Jumlah Penumpang (optional)
           <div className=" relative w-[200px] mt-2">
             <input
-              // onChange={(e) => onChangePasswordHandler(e)}
+              onChange={(e) => onChangeCapacity(e)}
               className="w-full p-1 pl-3 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
               // id="inline-password"
               type="number"
@@ -148,7 +197,9 @@ export default function ListCar() {
         </div>
         <div className="font-sans text-gray-700 text-sm m-6">
           <p></p>
-          <button className="bg-[#5CB85F] mt-6 text-white font-bold py-2 px-7 w-[150px]">
+          <button 
+            onChange={(e) => onSubmitButtonHandler(e)}
+            className="bg-[#5CB85F] mt-6 text-white font-bold py-2 px-7 w-[150px]">
             Cari Mobil
             {/* <Link
               to="/cars"
@@ -159,6 +210,30 @@ export default function ListCar() {
           </button>
         </div>
       </div>
+      {carsData.map((car) => (
+        <div key={car.id} className="grid grid-cols-4">
+          <div className="drop-shadow-xl bg-white rounded m-8 p-8 w-[300px]">
+            <img src={car.image} alt="" className="w-[270px] h-[160px]" />
+            <h2 className="font-sans text-black font-bold text-base mb-2 mt-2">
+              {car.manufacture} {car.model}
+            </h2>
+            <p className="font-sans text-black font-bold text-xl">
+              {car.rentPerDay} per-day
+            </p>
+            <p className="font-sans text-black text-sm">{car.description}</p>
+            <p className="font-sans text-black text-sm">
+              Capacity: {car.capacity}
+            </p>
+            <p className="font-sans text-black text-sm">
+              Transmission: {car.transmission}
+            </p>
+            <p className="font-sans text-black text-sm">Year: {car.year}</p>
+            <button className="bg-[#5CB85F] mt-6 text-white font-bold py-2 px-7 w-[200px]">
+              Choose the car
+            </button>
+          </div>
+        </div>
+      ))}
       <script src="https://unpkg.com/flowbite@1.5.5/dist/datepicker.js"></script>
       <Footer />
     </div>
