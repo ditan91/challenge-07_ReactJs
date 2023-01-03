@@ -88,7 +88,7 @@ export default function LoginPage() {
               <div className="mb-4 mt-3">
                 <button
                   onClick={(e) => onSubmitButtonHandler(e)}
-                  className="mr-4 w-[400px] bg-[#1e40af] shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-9 w-[230px] rounded"
+                  className="mr-4 w-[400px] bg-[#1e40af] shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-9 rounded"
                   type="button">
                   <Link to="/" className="no-underline text-white font-sans text-sm">
                     Sign In

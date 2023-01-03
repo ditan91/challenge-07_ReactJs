@@ -25,14 +25,14 @@ function HomePage() {
 
         //biar nggk balik lagi ke login
         if (validateTokenResponse.status !== 200) {
-          navigate("/");
+          navigate("/login");
         } else {
           // console.log(validateTokenResponse.data.data.user);
           setLoggedInUser(validateTokenResponse.data.data.user);
         }
       } catch (err) {
         console.log(err);
-        // navigate("/login");
+        navigate("/login");
       }
     };
 

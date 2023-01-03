@@ -16,19 +16,19 @@ export default function ListCar() {
 
   const [carsData, setCarsData] = useState([]);
   
-
   useEffect(() => {
     console.log("useEffect running");
     const getCarsData = async () => {
       const cars = await axios.get(
-        "https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json"
+        "https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json",
+
 
       );
       setCarsData(cars.data);
     };
 
     getCarsData();
-  });
+  },[]);
 
   // const [type, setType] = useState("");
   const [date, setDate] = useState("");
@@ -55,22 +55,16 @@ export default function ListCar() {
 
     setCapacity(value);
   };
-  const ListCar = []
-  const [filter, setFilterCars] = useState();
   const onSubmitButtonHandler = async (e) => {
     e.preventDefault();
+    console.log("tes")
+    const ListFilterCars=[]
     carsData.map((car) => {
-      if (
-        date <= car.availableAt.split("T", 1) &&
-        capacity <= car.capacity &&
-        time.split(":", 1) <=
-          car.availableAt.substring(11, 16).split(":", 1)
-      ) {
-        ListCar.push(car);
-      }
+      if (car.available === true && capacity <= car.capacity) {
+        ListFilterCars.push(car)
+      } 
     });
-
-    setFilterCars(ListCar);
+    setCarsData(ListFilterCars);
   };
   
   return (
@@ -198,7 +192,7 @@ export default function ListCar() {
         <div className="font-sans text-gray-700 text-sm m-6">
           <p></p>
           <button 
-            onChange={(e) => onSubmitButtonHandler(e)}
+            onClick={(e) => onSubmitButtonHandler(e)}
             className="bg-[#5CB85F] mt-6 text-white font-bold py-2 px-7 w-[150px]">
             Cari Mobil
             {/* <Link
@@ -210,30 +204,33 @@ export default function ListCar() {
           </button>
         </div>
       </div>
-      {carsData.map((car) => (
-        <div key={car.id} className="grid grid-cols-4">
-          <div className="drop-shadow-xl bg-white rounded m-8 p-8 w-[300px]">
-            <img src={car.image} alt="" className="w-[270px] h-[160px]" />
-            <h2 className="font-sans text-black font-bold text-base mb-2 mt-2">
-              {car.manufacture} {car.model}
-            </h2>
-            <p className="font-sans text-black font-bold text-xl">
-              {car.rentPerDay} per-day
-            </p>
-            <p className="font-sans text-black text-sm">{car.description}</p>
-            <p className="font-sans text-black text-sm">
-              Capacity: {car.capacity}
-            </p>
-            <p className="font-sans text-black text-sm">
-              Transmission: {car.transmission}
-            </p>
-            <p className="font-sans text-black text-sm">Year: {car.year}</p>
-            <button className="bg-[#5CB85F] mt-6 text-white font-bold py-2 px-7 w-[200px]">
-              Choose the car
-            </button>
+      <div className="grid grid-cols-4">
+        {carsData.map((car) => (
+          <div key={car.id}>
+            <div className="drop-shadow-xl bg-white rounded m-8 p-8 w-[300px]">
+              <img src={car.image} alt="" className="w-[270px] h-[160px]" />
+              <h2 className="font-sans text-black font-bold text-base mb-2 mt-2">
+                {car.manufacture} {car.model}
+              </h2>
+              <p className="font-sans text-black font-bold text-xl">
+                {car.rentPerDay} per-day
+              </p>
+              <p className="font-sans text-black text-sm">{car.description}</p>
+              <p className="font-sans text-black text-sm">
+                Capacity: {car.capacity}
+              </p>
+              <p className="font-sans text-black text-sm">
+                Transmission: {car.transmission}
+              </p>
+              <p className="font-sans text-black text-sm">Year: {car.year}</p>
+              <button className="bg-[#5CB85F] mt-6 text-white font-bold py-2 px-7 w-[200px]">
+                Choose the car
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      
       <script src="https://unpkg.com/flowbite@1.5.5/dist/datepicker.js"></script>
       <Footer />
     </div>
