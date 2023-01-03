@@ -16,13 +16,13 @@ function Header() {
   };
   return (
     <div className="bg-[#F1F3FF]">
-      {loggedInUser ? loggedInUser.name : ""}{" "}
+      
       <div className="p-8">
         <ul className="flex justify-end">
-          <li className="mr-6">
+          <li className="mr-2">
             <img src="/logo.svg" className="mr-[750px]" alt=""/>
           </li>
-          <li className="mr-2">
+          <li className="mr-6">
             <a
               className="text-black hover:text-blue-800 text-sm font-sans"
               href="/"
@@ -73,7 +73,7 @@ function Header() {
         
         <div className="m-[40px]">
           <h1 className="font-sans text-black font-bold text-4xl mb-8">Sewa & Rental Mobil Terbaik di Kawasan Bandung</h1>
-          <p className="font-sans text-black text-sm mr-[175px] mb-6">Selamat datang di Binar Car Rental, Kami menyediakan mobil kualitas terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu untuk sewa mobil selama 24 jam.</p>
+          <p className="font-sans text-black text-sm mr-[175px] mb-6">Selamat datang {loggedInUser ? loggedInUser.name : ""}{" "} di Binar Car Rental, Kami menyediakan mobil kualitas terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu untuk sewa mobil selama 24 jam.</p>
           <button className="bg-[#5CB85F] text-white font-bold py-2 px-7 w-[200px] mt-[-10px]">
             <Link
               to="/cars"

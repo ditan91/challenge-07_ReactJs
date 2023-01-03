@@ -30,16 +30,16 @@ export default function ListCar() {
     getCarsData();
   },[]);
 
-  // const [type, setType] = useState("");
+  const [type, setType] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [capacity, setCapacity] = useState();
 
-  // const onChangeType = (e) => {
-  //   const value = e.target.value;
+  const onChangeType = (e) => {
+    const value = e.target.value;
 
-  //   setType(value);
-  // };
+    setType(value);
+  };
   const onChangeDate = (e) => {
     const value = e.target.value;
 
@@ -58,6 +58,9 @@ export default function ListCar() {
   const onSubmitButtonHandler = async (e) => {
     e.preventDefault();
     console.log("tes")
+    if (type === " " || date === " "|| time ===" " || capacity === " "){
+      alert("Fill all the blank")
+    }
     const ListFilterCars=[]
     carsData.map((car) => {
       if (car.available === true && capacity <= car.capacity) {
@@ -72,10 +75,10 @@ export default function ListCar() {
       {loggedInUser ? loggedInUser.name : ""}{" "}
       <div className="p-8">
         <ul className="flex justify-end">
-          <li className="mr-6">
+          <li className="mr-2">
             <img src="/logo.svg" className="mr-[750px]" alt="" />
           </li>
-          <li className="mr-2">
+          <li className="mr-6">
             <a
               className="text-black hover:text-blue-800 text-sm font-sans"
               href="/"
@@ -143,7 +146,7 @@ export default function ListCar() {
         <div className="font-sans text-gray-700 text-sm m-6">
           Tipe Driver
           <div className="relative w-[200px] mt-2">
-            <select className="w-full p-1 pl-3 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+            <select onChange={(e) => onChangeType(e)} className="w-full p-1 pl-3 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
               <option className="font-sans text-sm mt-5">
                 Pilih Tipe Driver
               </option>
@@ -207,7 +210,7 @@ export default function ListCar() {
       <div className="grid grid-cols-4">
         {carsData.map((car) => (
           <div key={car.id}>
-            <div className="drop-shadow-xl bg-white rounded m-8 p-8 w-[300px]">
+            <div className="drop-shadow-xl bg-white rounded-[20px] m-8 p-8 w-[300px] h-[500px]">
               <img src={car.image} alt="" className="w-[270px] h-[160px]" />
               <h2 className="font-sans text-black font-bold text-base mb-2 mt-2">
                 {car.manufacture} {car.model}
@@ -215,15 +218,27 @@ export default function ListCar() {
               <p className="font-sans text-black font-bold text-xl">
                 {car.rentPerDay} per-day
               </p>
+             
               <p className="font-sans text-black text-sm">{car.description}</p>
-              <p className="font-sans text-black text-sm">
-                Capacity: {car.capacity}
-              </p>
-              <p className="font-sans text-black text-sm">
-                Transmission: {car.transmission}
-              </p>
-              <p className="font-sans text-black text-sm">Year: {car.year}</p>
-              <button className="bg-[#5CB85F] mt-6 text-white font-bold py-2 px-7 w-[200px]">
+              <div className="absolute inset-x-center bottom-20">
+                <div className="flex">
+                  <img src="/people.svg" alt="" className="w-[20px] h-[20px] mr-2" />
+                  <p className="font-sans text-black text-sm">
+                    {car.capacity}
+                  </p>
+                </div>
+                <div className="flex">
+                  <img src="/car_1.svg" alt="" className="w-[20px] h-[20px] mr-2" />
+                  <p className="font-sans text-black text-sm">
+                    {car.transmission}
+                  </p>
+                </div>
+                <div className="flex">
+                  <img src="/calendar_1.svg" alt="" className="w-[20px] h-[20px] mr-2" />
+                  <p className="font-sans text-black text-sm">{car.year}</p>
+                </div>
+              </div>
+              <button className="absolute inset-x-center bottom-5 bg-[#2563eb] mt-6 text-white font-bold py-2 px-7 w-[240px]">
                 Choose the car
               </button>
             </div>
