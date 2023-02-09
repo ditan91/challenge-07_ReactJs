@@ -3,6 +3,6 @@ This project is a website application developed using the ReactJs programming la
 
 # Features
 - Tennat
-- - j
+  - j
 - Seeker
 - Superadmin
