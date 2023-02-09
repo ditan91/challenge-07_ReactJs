@@ -35,27 +35,27 @@ KOSANKU merupakan projek aplikasi website menggunakan ReactJs. Aplikasi ini dibu
 Cukup akses link berikut https://frontend-fsw.vercel.app/ 
 
 # Contributor
-- Developer 1
-  Nama  : Rindho Ananta Samat
-  Email : rindho.ananta@ti.ukdw.ac.id
-- Developer 2
-  Nama  : Raihan
-  Email :
-- Developer 3
-  Nama  : Wahyu
-  Email :
-- Developer 4
-  Nama  : Ilyas
-  Email :
-- Developer 5
-  Nama  : Fayyadh
-  Email :
-- Developer 6
-  Nama  : Dita Noviyanti
-  Email : ditanoviyanti91@gmail.com
-- Developer 7
-  Nama  : Ryan Jo
-  Email :
-- Developer 8
-  Nama  : Trivena
-  Email :
+Developer 1
+- Nama  : Rindho Ananta Samat
+- Email : rindho.ananta@ti.ukdw.ac.id
+Developer 2
+- Nama  : Raihan
+- Email :
+Developer 3
+- Nama  : Wahyu
+- Email :
+Developer 4
+- Nama  : Ilyas
+- Email :
+Developer 5
+- Nama  : Fayyadh
+- Email :
+Developer 6
+- Nama  : Dita
+- Email : ditanoviyanti91@gmail.com
+Developer 7
+- Nama  : Ryan Jo
+- Email :
+Developer 8
+- Nama  : Trivena
+- Email :
